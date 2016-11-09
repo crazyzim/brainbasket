@@ -29,7 +29,11 @@ string hashtableGet (hashtable*h , string key);
 hashtable* hashcreate (int size)
 {
     hashtable* h = malloc (sizeof (hashtable)) ;
+<<<<<<< HEAD
     h->table = malloc(sizeof(node)*size);
+=======
+    h->table = malloc(sizeof(node_s)*size);
+>>>>>>> bad692e6bc4fc65c3edd776740cd7f4878ee8fbc
     for (int i = 0; i < size ; i++)
     {
         h->table[i] = NULL;
@@ -41,6 +45,7 @@ hashtable* hashcreate (int size)
 
 void hashdestroy (hashtable* h)
 {
+<<<<<<< HEAD
    
     if (h != NULL)
     {
@@ -60,6 +65,16 @@ int hash(hashtable* h , string key)
 {
     unsigned long int hashvalue = 0; 
     int i=0;
+=======
+    
+    
+}
+
+int hashresearch (hashtable* h , string key)
+{
+    unsigned long int hashvalue ; 
+    int i;
+>>>>>>> bad692e6bc4fc65c3edd776740cd7f4878ee8fbc
     while (hashvalue < ULONG_MAX && i < strlen(key))
     {
         hashvalue = hashvalue << 8 ; // *256 
@@ -70,6 +85,7 @@ int hash(hashtable* h , string key)
 }
 
 
+<<<<<<< HEAD
 node* hashtableNewPair (string key, string value )
 {
     node *new_node = malloc (sizeof(node));
@@ -129,6 +145,12 @@ int main ()
     
     
     hashdestroy(boo);
+=======
+
+
+int main ()
+{
+>>>>>>> bad692e6bc4fc65c3edd776740cd7f4878ee8fbc
     
     
     
