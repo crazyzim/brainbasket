@@ -29,7 +29,7 @@ string hashtableGet (hashtable*h , string key);
 hashtable* hashcreate (int size)
 {
     hashtable* h = malloc (sizeof (hashtable)) ;
-    h->table = malloc(sizeof(node_s)*size);
+    h->table = malloc(sizeof(node)*size);
     for (int i = 0; i < size ; i++)
     {
         h->table[i] = NULL;
@@ -41,7 +41,16 @@ hashtable* hashcreate (int size)
 
 void hashdestroy (hashtable* h)
 {
-    hashtable* tmp ; 
+   
+    if (h != NULL)
+    {
+         if (h->table != NULL)
+        {
+        free(h->table);
+        h->table = NULL;
+        }
+    free(h);
+    }
     //free h->table 
     //free h
     
@@ -49,8 +58,8 @@ void hashdestroy (hashtable* h)
 
 int hash(hashtable* h , string key)
 {
-    unsigned long int hashvalue ; 
-    int i;
+    unsigned long int hashvalue = 0; 
+    int i=0;
     while (hashvalue < ULONG_MAX && i < strlen(key))
     {
         hashvalue = hashvalue << 8 ; // *256 
@@ -76,7 +85,7 @@ void hashtableSet ( hashtable* h , string key, string value )
      
     int index = hash(h , key); 
     node *new_next; 
-    node *last; 
+    //node *last; 
     new_next = h->table[index];
     //...
     
@@ -97,7 +106,7 @@ void hashtableSet ( hashtable* h , string key, string value )
 string hashtableGet (hashtable *h , string key)
 {
     
-   node *pair = h->table[hash(key)]; 
+   node *pair = h->table[hash(h, key)]; 
     if ( pair == NULL || pair-> key == NULL )
     {
         return NULL ; 
@@ -110,6 +119,16 @@ string hashtableGet (hashtable *h , string key)
 
 int main ()
 {
+    hashtable * boo = hashcreate(100);
+    //node* cat_node = hashtableNewPair("cat"; "kitVasil");
+    //node* dog_node = hashtableNewPair("dog" ;"cthulhu fhtagn");
+    hashtableSet(boo , "cat", "kitVasil");
+    hashtableSet(boo , "dog", "cthulhu fhtagn");
+    string cvalue = hashtableGet(boo,"cat");
+    printf("%s\n", cvalue);
+    
+    
+    hashdestroy(boo);
     
     
     
